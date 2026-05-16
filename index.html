@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Brand Standard | Система бренда</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">
+                    <h3>a.parts</h3>
+                    <div class="meta">гайдбук</div>
+                </div>
+            </div>
+            <div class="subnav-title">Содержание</div>
+            <nav class="nav">
+                <a href="#logo-block"><span class="nav-icon-hidden">01</span><span class="nav-text">Логотип</span><span>01</span></a>
+                <a href="#palette"><span class="nav-icon-hidden">02</span><span class="nav-text">Палитра</span><span>02</span></a>
+                <a href="#type"><span class="nav-icon-hidden">03</span><span class="nav-text">Типографика</span><span>03</span></a>
+                <a href="#brand-graphics"><span class="nav-icon-hidden">04</span><span class="nav-text">Фирменная графика</span><span>04</span></a>
+                <a href="#photostyle"><span class="nav-icon-hidden">05</span><span class="nav-text">Фотостиль</span><span>05</span></a>
+                <a href="#ui"><span class="nav-icon-hidden">06</span><span class="nav-text">UI‑kit</span><span>06</span></a>
+                <a href="#carriers"><span class="nav-icon-hidden">07</span><span class="nav-text">Фирменные носители</span><span>07</span></a>
+                <a href="#conclusion"><span class="nav-icon-hidden">08</span><span class="nav-text">Заключение</span><span>08</span></a>
+                <a href="#contacts"><span class="nav-icon-hidden">09</span><span class="nav-text">Контакты</span><span>09</span></a>
+            </nav>
+            <div class="side-bottom">
+                <button class="tool-btn" id="collapseSidebarBtn"><span class="material-symbols-outlined">chevron_left</span><span>Свернуть</span></button>
+                <button class="tool-btn" id="themeToggle"><span class="material-symbols-outlined">dark_mode</span><span>Тема</span></button>
+            </div>
+        </aside>
+
+        <main>
+            <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+
+            <section id="hub" class="reveal show">
+                <div class="section-head">
+                    <h2>Гайдбук</h2>
+                    <p>Интерактивная система бренда</p>
+                </div>
+            </section>
+
+            <!-- 1. ЛОГОТИП -->
+            <section id="logo-block" class="reveal">
+                <div class="section-head">
+                    <h2>Логотип и знак</h2>
+                    <p>Основная, монохромная, сетка, охранное поле</p>
+                </div>
+                <div class="logo-strip">
+                    <div class="logo-card">
+                        <div class="logo-visual"><img src="images/logo-icon.png" alt="Основной логотип" class="logo-visual-img"></div>
+                        <div class="logo-description"><strong>Основная версия</strong><p>Монохромный знак на светлом фоне.</p></div>
+                    </div>
+                    <div class="logo-card">
+                        <div class="logo-visual"><img src="images/p2.png" alt="Монохром" class="logo-visual-img"></div>
+                        <div class="logo-description"><strong>Цветной</strong><p>Для оформления.</p></div>
+                    </div>
+                    <div class="logo-card">
+                        <div class="logo-visual"><img src="images/p3.png" alt="Модульная сетка" class="logo-visual-img"></div>
+                        <div class="logo-description"><strong>Модульная сетка</strong><p>Квадрат 24×24 модуля.</p></div>
+                    </div>
+                    <div class="logo-card">
+                        <div class="logo-visual"><img src="images/p4.png" alt="Охранное поле" class="logo-visual-img"></div>
+                        <div class="logo-description"><strong>Охранное поле</strong><p>Отступ = 1 модуль.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. ПАЛИТРА -->
+            <section id="palette" class="reveal">
+                <div class="section-head">
+                    <h2>Цветовая палитра</h2>
+                    <p>Основные и дополнительные цвета бренда</p>
+                </div>
+                <div class="palette-filter-bar">
+                    <button class="palette-filter-chip active" data-palette-filter="primary">Основные</button>
+                    <button class="palette-filter-chip" data-palette-filter="secondary">Дополнительные</button>
+                </div>
+                <div class="palette-grid-modern" id="paletteGrid"></div>
+            </section>
+
+            <!-- 3. ТИПОГРАФИКА -->
+            <section id="type" class="reveal">
+                <div class="section-head">
+                    <h2>Типографика</h2>
+                    <p>Для шрифтовой пары были выбраны два гротеска, построенные на контрасте.  
+                        Такое сочетание создаёт динамику между сильным акцентным заголовком и комфортным основным текстом</p>
+                </div>
+                <div class="typo-panels">
+                    <div class="typo-panel">
+                        <div class="typo-preview-block">
+                            <div class="typo-label">Заголовки "Benzin"</div>
+                            
+                            <div id="headingTextBlock" style="font-size: 2rem; font-family: 'Benzin';">Заголовок бренда</div>
+                        </div>
+                        <div class="typo-controls-horizontal">
+                            <label>Размер</label>
+                            <input type="range" id="headingSizeSlider" min="16" max="80" value="32">
+                            <span id="headingSizeValue">32px</span>
+                        </div>
+                    </div>
+                    <div class="typo-panel">
+                        <div class="typo-preview-block">
+                            <div class="typo-label">Основной текст "Codec Pro"</div>
+                            
+                            <div id="bodyTextBlock" style="font-size: 1rem; font-family: 'Codec Pro';">Основной текст: бренд как система, понятная и функциональная. Каждый элемент имеет значение, а типографика создаёт настроение.</div>
+                        </div>
+                        <div class="typo-controls-horizontal">
+                            <label>Размер</label>
+                            <input type="range" id="bodySizeSlider" min="12" max="48" value="16">
+                            <span id="bodySizeValue">16px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. ФИРМЕННАЯ ГРАФИКА -->
+            <section id="brand-graphics" class="reveal">
+                <div class="section-head">
+                    <h2>Фирменная графика</h2>
+                    <p>Паттерны, орнаменты и графические элементы бренда</p>
+                </div>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <img src="images/pattern1.png" alt="Основной элемент" class="concept-card-img">
+                        <h3>Основной элемент</h3>
+                        <p>Графический паттерн на основе фирменного знака.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3>Использование</h3>
+                        <p>Правила применения графики в макетах.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. ФОТОСТИЛЬ -->
+            <section id="photostyle" class="reveal">
+                <div class="section-head">
+                    <h2>Фотостиль</h2>
+                    <p>Принципы обработки и подбора фотографий</p>
+                </div>
+                <div class="photostyle-grid">
+                    <div class="photostyle-card photostyle-wide">
+                        <img src="images/color-correction.png" alt="Цветокоррекция" class="photostyle-img">
+                        <h3>Наложение градиента</h3>
+                        <p>Используется для digital и печатной продукции. </p>
+                    </div>
+                    <div class="photostyle-card">
+                        <h3>Настроение</h3>
+                        <p>Визуальное решение строится на контрасте: чёрно‑белый градиент с текстурным шумом задаёт строгость 
+                            и тактильную глубину, формируя брутальную основу композиции.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. UI KIT -->
+            <!-- 6. UI KIT -->
+<section id="ui" class="reveal">
+    <div class="section-head">
+        <h2>Digital / UI Kit</h2>
+        <p>Кнопки, поля ввода, карточки, навигация — система правил</p>
+    </div>
+
+    <div class="ui-kit-container">
+        
+        <!-- КНОПКИ -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Кнопки</h3>
+                <p>Основные кнопки: единый размер 48px, состояния default / hover / active</p>
+            </div>
+            <div class="ui-category-content">
+                <button class="btn-primary">Основная</button>
+                <button class="btn-dark"><span class="material-symbols-outlined">filter_alt</span> Фильтр</button>
+                <button class="btn-outline">Сбросить</button>
+                <button class="btn-search">Найти</button>
+                <button class="btn-link">Изменить</button>
+                <div>
+                    <button class="btn-tab tab-profile">Профиль</button>
+                    <button class="btn-tab tab-favorites">Избранное</button>
+                </div>
+                <div>
+                    <button class="btn-cart" id="demoCartBtnUI">
+                        <span>1 250 ₽ <span class="material-symbols-outlined">shopping_cart</span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ПОЛЯ ВВОДА -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Поля ввода</h3>
+                <p>Поиск, промокод, данные карты — состояния default / focus</p>
+            </div>
+            <div class="ui-category-content">
+                <div class="search-wrapper">
+                    <input type="text" class="input-search-nav" placeholder="Поиск запчастей...">
+                    <span class="search-icon"><span class="material-symbols-outlined">search</span></span>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="input-search-large" placeholder="Название детали или VIN...">
+                    <button class="btn-search">Найти</button>
+                </div>
+                <div class="promo-wrapper">
+                    <input type="text" class="input-promo" placeholder="Введите промокод">
+                    <button class="btn-small">Применить</button>
+                </div>
+                <div>
+                    <div class="card-input-group">
+                        <label>Номер карты</label>
+                        <input type="text" class="input-card" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="card-row">
+                        <div class="card-input-group">
+                            <label>ММ/ГГ</label>
+                            <input type="text" class="input-card" placeholder="12/28">
+                        </div>
+                        <div class="card-input-group">
+                            <label>CVC</label>
+                            <input type="text" class="input-card" placeholder="***">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКИ -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Карточки</h3>
+                <p>Карточка товара, плашка статуса, при ховере поднимается</p>
+            </div>
+            <div class="ui-category-content">
+                <div class="product-card-ui">
+                    <div class="product-image"></div>
+                    <div class="product-title">Блок управления</div>
+                    <div class="product-desc">Bosch / для Hyundai</div>
+                    <button class="btn-cart" style="width:100%">12 500 ₽</button>
+                </div>
+                <div class="badge-ui">В наличии</div>
+            </div>
+        </div>
+
+        <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Навигационная панель</h3>
+                <p>Десктоп: островок → Мобилка: приклеенная на всю ширину</p>
+            </div>
+            <div class="ui-category-content">
+                <div class="bottom-nav-demo">
+                    <div class="nav-items">
+                        <button class="nav-item-demo"><span class="material-symbols-outlined">menu</span><span>каталог</span></button>
+                        <button class="nav-item-demo"><span class="material-symbols-outlined">directions_car</span><span>гараж</span></button>
+                        <button class="nav-item-demo"><span class="material-symbols-outlined">shopping_cart</span><span>корзина</span></button>
+                        <button class="nav-item-demo"><span class="material-symbols-outlined">favorite</span><span>избранное</span></button>
+                        <button class="nav-item-demo"><span class="material-symbols-outlined">person</span><span>лк</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- МОДАЛЬНОЕ ОКНО (уменьшенная плашка) -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Модальное окно</h3>
+                <p>Десктоп: боковая панель → Мобилка: выезжает снизу</p>
+            </div>
+            <div class="ui-category-content">
+                <div class="modal-demo-trigger" id="openModalTrigger">
+                    <div class="modal-demo-card">
+                        <h4>Модальное окно</h4>
+                        <p>Десктоп: выезжает справа<br>Мобилка: выезжает снизу</p>
+                        <button class="btn-primary" style="width:100%">Открыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ДРОПДАУН (СОРТИРОВКА) -->
+        <div class="ui-category">
+            <div class="ui-category-header">
+                <h3>Ниспадающий список</h3>
+                <p>Сортировка — выпадающее меню при клике</p>
+            </div>
+            <div class="ui-category-content">
+                <div class="sort-dropdown-demo">
+                    <button class="btn-dark" id="sortBtnDemoUI"><span class="material-symbols-outlined">sort</span> Сортировать</button>
+                    <div class="sort-menu-demo" id="sortMenuDemoUI">
+                        <div class="sort-option-demo" data-sort="new">по новизне</div>
+                        <div class="sort-option-demo" data-sort="popular">по популярности</div>
+                        <div class="sort-option-demo" data-sort="expensive">дороже</div>
+                        <div class="sort-option-demo" data-sort="cheap">дешевле</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Кастомная модалка для демо -->
+<div id="customModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <h3>Модальное окно</h3>
+        <p>Десктоп: выезжает справа<br>Мобильное: выезжает снизу с drag-хэндлом</p>
+        <button class="btn-primary" id="closeCustomModal">Закрыть</button>
+    </div>
+</div>
+
+            <!-- 7. ФИРМЕННЫЕ НОСИТЕЛИ -->
+            <section id="carriers" class="reveal">
+                <div class="section-head">
+                    <h2>Фирменные носители</h2>
+                    <p>Нажмите на карточку для детального просмотра</p>
+                </div>
+                <div class="filter-pagination-bar">
+                    <div class="filter-bar">
+                        <button class="filter-chip active" data-filter="all">Все</button>
+                        <button class="filter-chip" data-filter="print">Печатные</button>
+                        <button class="filter-chip" data-filter="pack">Сувениры</button>
+                        <button class="filter-chip" data-filter="digital">Digital</button>
+                        <button class="filter-chip" data-filter="outdoor">Наружная</button>
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn" id="prevPageBtn">←</button>
+                        <span class="page-counter" id="pageCounter">стр. 1 / 1</span>
+                        <button class="page-btn" id="nextPageBtn">→</button>
+                    </div>
+                </div>
+                <div class="carrier-grid-modern" id="carrierGridModern"></div>
+            </section>
+
+            <section id="conclusion" class="reveal">
+                <div class="section-head"><h2>Заключение</h2><p>Итоги и рекомендации</p></div>
+                <div class="concept-card"><h3>Гайдлайн бренда</h3><p>Разработанный гайдлайн является основным документом, регламентирующим визуальный язык бренда. Все представленные правила — от логотипа и цветовой палитры до типографики и фирменных носителей — направлены на формирование целостного, узнаваемого и профессионального образа.</p></div>
+            </section>
+
+            <section id="contacts" class="reveal">
+                <div class="section-head"><h2>Контакты</h2><p>Свяжитесь с мной</p></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;"><div><h3>Информация</h3><p>Яковлева Анастасия Дмитриевна<br>Год: 2026</p></div><div><p>По всем вопросам:<br>hello@aparts.ru</p></div></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal" id="carrierModal"><div class="modal-box"><button class="close" id="closeModalBtn">✕</button><h2 id="modalTitle"></h2><div class="modal-image-tabs" id="modalImageTabs"></div><div class="carrier-modal-visual" id="modalVisual"></div><p id="modalDesc"></p><div class="modal-nav"><button id="modalPrevBtn">← Предыдущий</button><button id="modalNextBtn">Следующий →</button></div></div></div>
+    <button class="top-btn" id="topBtn">↑ Наверх</button>
+        <div class="expandable-fab" id="expandableFab">
+            <div class="fab-branches">
+                <div class="fab-icons-column">
+                    <a href="#logo-block" class="fab-icon-btn">01</a>
+                    <a href="#palette" class="fab-icon-btn">02</a>
+                    <a href="#type" class="fab-icon-btn">03</a>
+                    <a href="#brand-graphics" class="fab-icon-btn">04</a>
+                    <a href="#photostyle" class="fab-icon-btn">05</a>
+                    <a href="#ui" class="fab-icon-btn">06</a>
+                    <a href="#carriers" class="fab-icon-btn">07</a>
+                    <a href="#conclusion" class="fab-icon-btn">08</a>
+                    <a href="#contacts" class="fab-icon-btn">09</a>
+                    <div class="fab-icon-btn" id="fabThemeBranch">🌓</div>
+                </div>
+            </div>
+    <button class="fab-main-btn" id="fabMainBtn">☰</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
