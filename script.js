@@ -8,7 +8,7 @@ const carriersData = [
     { id: 5, type: "pack", name: "Ручки", desc: "Фирменные шариковые ручки с нанесением логотипа и названия бренда. Представлены в двух цветовых вариациях.", images: ["images/pens-1.png", "images/pens-2.svg"] },
     { id: 6, type: "print", name: "Конверт", desc: "Евроконверт с подкладкой размерами 220*110мм. Нанесен модифицировнаный логотип и контактная информация", images: ["images/envelope-1.png", "images/envelope-2.svg"] },
     { id: 7, type: "pack", name: "Папка", desc: "Папка-регистратор А4.", images: ["images/folder-1.png", "images/folder-2.jpg"] },
-    { id: 8, type: "pack", name: "Лента", desc: "Упаковочная лента.", images: ["images/ribbon-1.png", "images/ribbon-2.jpg"] },
+    { id: 8, type: "pack", name: "Лента", desc: "Упаковочная лента.", images: ["images/ribbon-1.png", "images/ribbon-2.svg"] },
     { id: 9, type: "pack", name: "Форма", desc: "Поло с вышитым логотипом для сотрудников", images: ["images/shirt-1.png", "images/shirt-2.jpg"] },
     { id: 10, type: "outdoor", name: "Грузовой автомобиль", desc: "Оклейка грузового транспорта размером 6000*2500мм. Несет на себе название и модифицированный логотип магазина, ссылку на сайт и слоган", images: ["images/truck-1.png", "images/truck-2.svg"] },
     { id: 11, type: "outdoor", name: "Морской контейнер", desc: "Оклейка контейнера. Несет на себе название и  модифицированный логотип магазина, ссылку на сайт и слоган, а также информацию по грузу.", images: ["images/container-1.png", "images/container-2.jpg"] },
