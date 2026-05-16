@@ -4,19 +4,19 @@ const carriersData = [
     { id: 1, type: "print", name: "Бейдж", desc: "Именной бейдж на крючке используется для идентификации и представлен с использованием фирменной графики. Его габариты соответствуют стандартному формату: ширина составляет 60 мм, а высота 90 мм. Для надписей используется шрифт CodecPro.", images: ["images/badge-1.png", "images/badge-2.svg"] },
     { id: 2, type: "print", name: "Визитка", desc: "Двусторонняя визитная карточка размером 90×50мм. На визите используется модифицированный логотип и фирменная графика", images: ["images/business-card-1.png", "images/business-card-2.svg"] },
     { id: 3, type: "pack", name: "Ароматизатор", desc: "Автомобильный ароматизатор из плотного картона с односторонней печатью. Размер 120x80 мм. Крепится на зеркало заднего вида с помощью ленты. Используется как промо-сувенир.", images: ["images/air-freshener-1.png", "images/air-freshener-2.svg"] },
-    { id: 4, type: "print", name: "Постер А4", desc: "Информационный постер формата А4 (210×297 мм). Предназначен для размещения как внутри магазина,так и внешне ", images: ["images/poster-a4-1.png", "images/poster-a4-2.jpg"] },
-    { id: 5, type: "pack", name: "Ручки", desc: "Фирменные шариковые ручки.", images: ["images/pens-1.png", "images/pens-2.svg"] },
-    { id: 6, type: "print", name: "Конверт", desc: "Евроконверт с подкладкой.", images: ["images/envelope-1.png", "images/envelope-2.svg"] },
+    { id: 4, type: "print", name: "Постер А4", desc: "Информационный постер формата А4 (210×297 мм). Предназначен для размещения как внутри магазина,так и вне для привлечения покупателей. Использованы основные шрифты CoderPro и Benzin-medium, а также фирменный фотостиль. ", images: ["images/poster-a4-1.png", "images/poster-a4-2.jpg"] },
+    { id: 5, type: "pack", name: "Ручки", desc: "Фирменные шариковые ручки с нанесением логотипа и названия бренда. Представлены в двух цветовых вариациях.", images: ["images/pens-1.png", "images/pens-2.svg"] },
+    { id: 6, type: "print", name: "Конверт", desc: "Евроконверт с подкладкой размерами 220*110мм. Нанесен модифицировнаный логотип и контактная информация", images: ["images/envelope-1.png", "images/envelope-2.svg"] },
     { id: 7, type: "pack", name: "Папка", desc: "Папка-регистратор А4.", images: ["images/folder-1.png", "images/folder-2.jpg"] },
     { id: 8, type: "pack", name: "Лента", desc: "Упаковочная лента.", images: ["images/ribbon-1.png", "images/ribbon-2.jpg"] },
-    { id: 9, type: "pack", name: "Рубашка", desc: "Поло с вышитым логотипом.", images: ["images/shirt-1.png", "images/shirt-2.jpg"] },
-    { id: 10, type: "outdoor", name: "Грузовой автомобиль", desc: "Оклейка грузового транспорта.", images: ["images/truck-1.png", "images/truck-2.svg"] },
-    { id: 11, type: "outdoor", name: "Морской контейнер", desc: "Оклейка контейнера.", images: ["images/container-1.png", "images/container-2.jpg"] },
-    { id: 12, type: "pack", name: "Кепка", desc: "Бейсболка с вышивкой.", images: ["images/cap-1.png", "images/cap-2.svg"] },
+    { id: 9, type: "pack", name: "Форма", desc: "Поло с вышитым логотипом для сотрудников", images: ["images/shirt-1.png", "images/shirt-2.jpg"] },
+    { id: 10, type: "outdoor", name: "Грузовой автомобиль", desc: "Оклейка грузового транспорта размером 6000*2500мм. Несет на себе название и модифицированный логотип магазина, ссылку на сайт и слоган", images: ["images/truck-1.png", "images/truck-2.svg"] },
+    { id: 11, type: "outdoor", name: "Морской контейнер", desc: "Оклейка контейнера. Несет на себе название и  модифицированный логотип магазина, ссылку на сайт и слоган, а также информацию по грузу.", images: ["images/container-1.png", "images/container-2.jpg"] },
+    { id: 12, type: "pack", name: "Кепка", desc: "Бейсболка с вышивкой для сотрудников. Представленна в фирменных цветах. С обратной стороны есть этикетка(нашивка) с логотипом.", images: ["images/cap-1.png", "images/cap-2.svg"] },
     { id: 13, type: "digital", name: "Сайт", desc: "Адаптивный корпоративный сайт.", images: ["images/website-1.png", "images/website-2.jpg"] },
-    { id: 14, type: "outdoor", name: "Билборд", desc: "Щит 3×6 м.", images: ["images/billboard-1.png", "images/billboard-2.svg"] },
-    { id: 15, type: "print", name: "Плакат А2", desc: "Информационный плакат.", images: ["images/poster-a2-1.png", "images/poster-a2-2.svg"] },
-    { id: 16, type: "outdoor", name: "Указатель", desc: "указатель", images: ["images/znak.png", "images/znak-2.svg"] }
+    { id: 14, type: "outdoor", name: "Билборд", desc: "Рекламный щит 3000×6000мм. Использована вся фирменная графика: от шрифтов до фирменных элементов. Представляет собой рекламу онлайн-магазина", images: ["images/billboard-1.png", "images/billboard-2.svg"] },
+    { id: 15, type: "print", name: "Плакат", desc: "Информационный плакат для рекламы. Представлен в формате А2 с использованием фирменного фотостиля, а также крупной типографики.", images: ["images/poster-a2-1.png", "images/poster-a2-2.svg"] },
+    { id: 16, type: "outdoor", name: "Указатель", desc: "Указатель для физической точки магазина. Выполнен с использованием фирменных цветов, шрифта Benzin-medium для заголовка отделов, а шрифт CodecPro для основной информации.", images: ["images/znak.png", "images/znak-2.svg"] }
 ];
 
 let currentFilter = "all";
