@@ -1626,3 +1626,11 @@ section:last-of-type {
 .close:hover {
     background: var(--surface-3);
 }
+
+.modal-image {
+    max-height: clamp(200px, 40vh, 500px);
+    max-width: clamp(280px, 90%, 600px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
