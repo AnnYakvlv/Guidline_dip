@@ -1396,7 +1396,14 @@ section:last-of-type {
     .close {
         margin-left: auto;  /* прижимает к правому краю */
         position: static;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+
         /*margin-top: 40px;*/
+    }
+    .modal-header h2 {
+        font-size: 1.3rem;
     }
     
     /* Вкладки */
