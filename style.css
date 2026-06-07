@@ -1420,7 +1420,11 @@ section:last-of-type {
         margin-bottom: 16px;
     }
 }
-
+@media (max-width: 768px) {
+    section {
+        padding: var(--space-8) var(--space-6);  /* 32px 24px */
+    }
+}
 
 
 /* Адаптив для планшетов */
