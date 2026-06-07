@@ -636,3 +636,21 @@
 .btn-cart.in-cart:active {
     background: #0d0d0d;  /* темнее */
 }
+
+/* Тёмная тема для выпадающего меню сортировки */
+[data-theme="dark"] .sort-menu-demo {
+    background: var(--surface);
+    border-color: var(--line);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .sort-option-demo {
+    color: #E0E0E0;  /* светлее чем var(--text) */
+    font-weight: 500; /* чуть жирнее для читаемости */
+}
+
+[data-theme="dark"] .sort-option-demo:hover {
+    background: #1E3A5F;  /* более насыщенный фон */
+    color: #FFFFFF;       /* белый текст при наведении */
+    font-weight: 500;
+}
