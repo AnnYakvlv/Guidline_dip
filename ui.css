@@ -122,9 +122,14 @@
     border: none;
     font-family: 'Codec Pro', monospace;
     font-size: 0.85rem;
-    color: #004AAD;
+    color: #211F22;
     cursor: pointer;
-    padding: 0;
+    padding: 0 16px;           /* добавляем горизонтальные отступы */
+    height: 48px;              /* фиксированная высота как у соседей */
+    display: inline-flex;      /* flex для центрирования */
+    align-items: center;       /* вертикальное центрирование */
+    justify-content: center;   /* горизонтальное центрирование */
+    border-radius: 8px; 
 }
 .btn-link:hover { text-decoration: underline; }
 
@@ -612,7 +617,7 @@
 
 /* btn-link - при нажатии */
 .btn-link:active {
-    color: #00307a;  /* темнее */
+    color: #002248;  /* темнее */
     text-decoration: none;
 }
 
