@@ -1419,6 +1419,7 @@ section:last-of-type {
     .modal-nav {
         margin-top: auto;       /* прижимаем к низу если контента мало */
         padding-top: 20px;
+        padding-bottom: 32px;
     }
     
     /* Описание */
