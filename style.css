@@ -1586,3 +1586,24 @@ section:last-of-type {
     background: var(--primary);
     color: white;
 }
+
+
+/* Кнопка закрытия — убираем absolute */
+.close {
+    position: static;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.close:hover {
+    background: var(--surface-3);
+}
