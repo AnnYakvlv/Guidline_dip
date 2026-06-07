@@ -586,3 +586,48 @@
 .ui-modal-mobile-content {
     position: relative;
 }
+
+/* btn-primary - при нажатии */
+.btn-primary:active {
+    background: #d4db4a;  /* темнее на 10% */
+    opacity: 1;
+}
+
+/* btn-dark - при нажатии */
+.btn-dark:active {
+    background: #001a3a;  /* темнее */
+    opacity: 1;
+}
+
+/* btn-outline - при нажатии */
+.btn-outline:active {
+    background: #d0e0ff;  /* более насыщенный фон */
+    border-color: #00307a;
+}
+
+/* btn-search - при нажатии */
+.btn-search:active {
+    background: #00307a;  /* темнее */
+}
+
+/* btn-link - при нажатии */
+.btn-link:active {
+    color: #00307a;  /* темнее */
+    text-decoration: none;
+}
+
+/* btn-tab - при нажатии */
+.btn-tab:active:not(.active) {
+    background: #d0e0ff;
+    border-color: #00307a;
+}
+
+/* btn-cart - при нажатии */
+.btn-cart:active {
+    background: #d4db4a;  /* темнее */
+}
+
+/* btn-cart.in-cart - при нажатии */
+.btn-cart.in-cart:active {
+    background: #0d0d0d;  /* темнее */
+}
