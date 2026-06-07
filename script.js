@@ -331,7 +331,7 @@ function updateCartButtonUI() {
         demoCartBtn.innerHTML = `<div class="qty-controls"><span class="qty-minus">−</span><span>${qtyUI}</span><span class="qty-plus">+</span></div>`;
     } else {
         demoCartBtn.classList.remove('in-cart');
-        demoCartBtn.innerHTML = `<span>1 250 ₽ <span class="material-symbols-outlined">shopping_cart</span></span>`;
+        demoCartBtn.innerHTML = `<span>1 250 ₽ </span>`;
         isInCartUI = false;
         qtyUI = 0;
     }
