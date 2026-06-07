@@ -243,7 +243,8 @@
 
 .input-promo {
     width: 280px;
-    padding: 10px 90px 10px 18px;
+    height: 48px;           /* фиксированная высота */
+    padding: 0 90px 0 18px;
     font-size: 0.9rem;
     border-radius: 40px;
     border: 1px solid var(--line);
@@ -268,9 +269,9 @@
     background: #004AAD;
     border: none;
     border-radius: 32px;
-    padding: 2px 16px;
+    padding: 8px 16px;
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     cursor: pointer;
 }
 
