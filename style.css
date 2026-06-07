@@ -1595,6 +1595,21 @@ section:last-of-type {
     color: white;
 }
 
+[data-theme="dark"] .btn-tab {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+[data-theme="dark"] .btn-tab.active {
+    background: #2266CC;
+    border-color: #2266CC;
+    color: white;
+}
+
+[data-theme="dark"] .btn-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 /* Хедер модального окна */
 .modal-header {
     display: flex;
