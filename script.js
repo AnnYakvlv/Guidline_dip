@@ -11,7 +11,7 @@ const carriersData = [
     { id: 8, type: "pack", name: "Лента", desc: "Упаковочная лента.", images: ["images/ribbon-1.png", "images/ribbon-2.svg"] },
     { id: 9, type: "pack", name: "Форма", desc: "Поло с вышитым логотипом для сотрудников", images: ["images/t-shirt1.png", "images/shirt.svg"] },
     { id: 10, type: "outdoor", name: "Грузовой автомобиль", desc: "Оклейка грузового транспорта размером 6000*2500мм. Несет на себе название и модифицированный логотип магазина, ссылку на сайт и слоган", images: ["images/truck-1.png", "images/truck.png"] },
-    { id: 11, type: "outdoor", name: "Морской контейнер", desc: "Оклейка контейнера. Несет на себе название и  модифицированный логотип магазина, ссылку на сайт и слоган, а также информацию по грузу.", images: ["images/container-1.png", "images/container-2.svg"] },
+    { id: 11, type: "outdoor", name: "Морской контейнер", desc: "Оклейка контейнера. Несет на себе название и  модифицированный логотип магазина, ссылку на сайт и слоган, а также информацию по грузу.", images: ["images/container-1.png", "images/container-2.png"] },
     { id: 12, type: "pack", name: "Кепка", desc: "Бейсболка с вышивкой для сотрудников. Представленна в фирменных цветах. С обратной стороны есть этикетка (нашивка) с логотипом.", images: ["images/cap-1.png", "images/cap.svg"] },
     { id: 13, type: "digital", name: "Сайт", desc: "Адаптивный корпоративный сайт.", images: ["images/web-site1.png", "images/website.svg"] },
     { id: 14, type: "outdoor", name: "Билборд", desc: "Рекламный щит 3000×6000мм. Использована вся фирменная графика: от шрифтов до фирменных элементов. Представляет собой рекламу онлайн-магазина", images: ["images/billboard-1.png", "images/billboard-2.svg"] },
