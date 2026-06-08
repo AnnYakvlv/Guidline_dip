@@ -1440,6 +1440,22 @@ section:last-of-type {
     .modal-image-container {
         height: 280px;  /* чуть меньше на мобильных */
     }
+   .typo-controls-horizontal {
+        padding: 10px 16px;
+        gap: 10px;
+    }
+    
+    .typo-controls-horizontal label {
+        font-size: 0.8rem;
+    }
+    
+    .typo-controls-horizontal span {
+        font-size: 0.8rem;
+    }
+    
+    .typo-controls-horizontal input {
+        font-size: 0.8rem;
+    }
 }
 
 /* Адаптив для телефонов */
