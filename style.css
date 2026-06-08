@@ -1455,6 +1455,7 @@ section:last-of-type {
     
     .typo-controls-horizontal input {
         font-size: 0.8rem;
+        min-width: 120px; 
     }
 }
 
