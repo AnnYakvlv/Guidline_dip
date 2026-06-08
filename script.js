@@ -246,17 +246,62 @@ document.querySelectorAll("[data-palette-filter]").forEach(btn => {
 
 renderPalette();
 
-// Типографика (убраны лишние кнопки)
-document.getElementById("headingSizeSlider").oninput = () => {
-    const v = document.getElementById("headingSizeSlider").value;
-    document.getElementById("headingTextBlock").style.fontSize = v + "px";
-    document.getElementById("headingSizeValue").innerText = v + "px";
+// Типографика с ограничением на мобилках
+const headingSlider = document.getElementById("headingSizeSlider");
+const headingText = document.getElementById("headingTextBlock");
+const headingValue = document.getElementById("headingSizeValue");
+const bodySlider = document.getElementById("bodySizeSlider");
+const bodyText = document.getElementById("bodyTextBlock");
+const bodyValue = document.getElementById("bodySizeValue");
+
+// Функция для проверки и ограничения размера на мобилках
+function clampHeadingSize() {
+    if (window.innerWidth <= 768) {
+        let currentVal = parseInt(headingSlider.value);
+        if (currentVal > 32) {
+            headingSlider.value = 32;
+            headingText.style.fontSize = "32px";
+            headingValue.innerText = "32px";
+        }
+    }
+}
+
+function clampBodySize() {
+    if (window.innerWidth <= 768) {
+        let currentVal = parseInt(bodySlider.value);
+        if (currentVal > 24) {
+            bodySlider.value = 24;
+            bodyText.style.fontSize = "24px";
+            bodyValue.innerText = "24px";
+        }
+    }
+}
+
+headingSlider.oninput = () => {
+    let v = parseInt(headingSlider.value);
+    if (window.innerWidth <= 768 && v > 32) {
+        v = 32;
+        headingSlider.value = 32;
+    }
+    headingText.style.fontSize = v + "px";
+    headingValue.innerText = v + "px";
 };
-document.getElementById("bodySizeSlider").oninput = () => {
-    const v = document.getElementById("bodySizeSlider").value;
-    document.getElementById("bodyTextBlock").style.fontSize = v + "px";
-    document.getElementById("bodySizeValue").innerText = v + "px";
+
+bodySlider.oninput = () => {
+    let v = parseInt(bodySlider.value);
+    if (window.innerWidth <= 768 && v > 24) {
+        v = 24;
+        bodySlider.value = 24;
+    }
+    bodyText.style.fontSize = v + "px";
+    bodyValue.innerText = v + "px";
 };
+
+// При ресайзе окна проверяем ограничения
+window.addEventListener('resize', () => {
+    clampHeadingSize();
+    clampBodySize();
+});
 
 // Логотипы с активным состоянием
 document.querySelectorAll(".logo-card").forEach(card => {
