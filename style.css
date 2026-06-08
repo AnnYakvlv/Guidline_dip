@@ -113,7 +113,8 @@ h1, h2, h3, h4 {
 
 p {
     color: var(--muted);
-    max-width: 72ch;
+    max-width: none;        /* убираем ограничение ширины */
+    width: 100%;  
 }
 
 button {
