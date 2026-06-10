@@ -131,7 +131,9 @@
     justify-content: center;   /* горизонтальное центрирование */
     border-radius: 8px; 
 }
-.btn-link:hover { text-decoration: underline; }
+.btn-link:hover { 
+   text-decoration: underline; 
+}
 
 .btn-tab {
     background: transparent;
@@ -653,4 +655,14 @@
     background: #1E3A5F;  /* более насыщенный фон */
     color: #FFFFFF;       /* белый текст при наведении */
     font-weight: 500;
+}
+
+[data-theme="dark"] .btn-link {
+    color: #FFFFFF;     
+}
+[data-theme="dark"] .btn-link:hover {
+    color: #002248;     
+}
+[data-theme="dark"] .btn-link:active {
+    color: #004AAD;     
 }
