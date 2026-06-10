@@ -175,6 +175,7 @@
 .btn-cart.in-cart {
     background: #211F22;
     color: white;
+    border: 1px solid #D9D9D9;
 }
 .btn-cart .qty-controls {
     display: flex;
