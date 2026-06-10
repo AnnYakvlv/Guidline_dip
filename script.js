@@ -505,73 +505,96 @@ window.addEventListener('resize', () => {
     }
 });
 
-
-function protectPrepositions() {
-    // Список предлогов и коротких слов (1-3 символа)
-    const prepositions = [
+// ========== ЗАЩИТА ОТ ВИСЯЧИХ ПРЕДЛОГОВ ==========
+function fixOrphanedPrepositions() {
+    const containers = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p, .cart-item-name, .cart-item-desc, .product-title, .product-desc');
+    
+    const prepositions = new Set([
         'в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 
         'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 
-        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни', 'из-за', 'из-под',
-        'же', 'бы', 'ли', 'жд', 'ль', 'ж', 'б', 'чт', 'чтоб', 'чтобы'
-    ];
+        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни'
+    ]);
     
-    // Создаём регулярное выражение для поиска предлогов в тексте
-    // Ищем предлог + пробел + слово (русские/английские буквы, цифры, дефис)
-    const prepositionPattern = new RegExp(
-        `\\b(${prepositions.join('|')})\\s+(?=[А-Яа-яЁёA-Za-z0-9-]+)`,
-        'gi'
-    );
-    
-    // Функция для обработки текстовых узлов
-    function processTextNode(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            // Проверяем, что текст не внутри тега <pre>, <code> и т.д.
-            let parent = node.parentElement;
-            if (parent && (parent.tagName === 'PRE' || parent.tagName === 'CODE' || parent.tagName === 'SCRIPT')) {
-                return;
-            }
-            
-            let text = node.textContent;
-            let hasMatch = prepositionPattern.test(text);
-            
-            if (hasMatch) {
-                // Заменяем пробелы на &nbsp; между предлогом и следующим словом
-                let newText = text.replace(prepositionPattern, (match) => {
-                    // match содержит предлог + пробел, убираем пробел и добавляем &nbsp;
-                    return match.trim() + '&nbsp;';
-                });
-                
-                if (newText !== text) {
-                    const span = document.createElement('span');
-                    span.innerHTML = newText;
-                    node.parentNode.replaceChild(span, node);
+    containers.forEach(container => {
+        if (container.hasAttribute('data-preposition-processed')) return;
+        
+        const walker = document.createTreeWalker(
+            container,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: function(node) {
+                    if (node.textContent.trim() === '') return NodeFilter.FILTER_SKIP;
+                    if (node.parentElement.tagName === 'SCRIPT' || 
+                        node.parentElement.tagName === 'STYLE') {
+                        return NodeFilter.FILTER_SKIP;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
                 }
             }
-        } else if (node.nodeType === Node.ELEMENT_NODE && 
-                   !['SCRIPT', 'STYLE', 'PRE', 'CODE', 'INPUT', 'TEXTAREA'].includes(node.tagName)) {
-            // Рекурсивно обрабатываем дочерние узлы, но не заходим в инпуты и скрипты
-            node.childNodes.forEach(processTextNode);
+        );
+        
+        const textNodes = [];
+        while (walker.nextNode()) {
+            textNodes.push(walker.currentNode);
         }
-    }
-    
-    // Запускаем обработку для body
-    document.body.childNodes.forEach(processTextNode);
+        
+        let containerChanged = false;
+        
+        textNodes.forEach(node => {
+            let text = node.textContent;
+            let changed = false;
+            
+            const words = text.split(/(\s+)/);
+            
+            for (let i = 0; i < words.length - 2; i++) {
+                const word = words[i].trim().toLowerCase();
+                if (prepositions.has(word) && words[i+1].trim() === '') {
+                    if (words[i+2] && words[i+2].trim()) {
+                        words[i] = words[i] + words[i+1] + words[i+2];
+                        words[i+1] = '';
+                        words[i+2] = '';
+                        changed = true;
+                        i += 2;
+                    }
+                }
+            }
+            
+            if (changed) {
+                const newText = words.join('');
+                const span = document.createElement('span');
+                span.innerHTML = newText;
+                span.className = 'preposition-group';
+                node.parentNode.replaceChild(span, node);
+                containerChanged = true;
+            }
+        });
+        
+        if (containerChanged) {
+            container.setAttribute('data-preposition-processed', 'true');
+        }
+    });
 }
 
-let resizeTimeout;
+// Запускаем после загрузки страницы
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixOrphanedPrepositions);
+} else {
+    fixOrphanedPrepositions();
+}
+
+// Запускаем при ресайзе
+let prepositionResizeTimeout;
 window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(fixOrphanedPrepositions, 250);
+    clearTimeout(prepositionResizeTimeout);
+    prepositionResizeTimeout = setTimeout(() => {
+        document.querySelectorAll('[data-preposition-processed]').forEach(el => {
+            el.removeAttribute('data-preposition-processed');
+        });
+        fixOrphanedPrepositions();
+    }, 300);
 });
 
-// Запускаем также при ресайзе окна (на случай изменения переносов)
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(fixOrphanedPrepositions, 250);
-});
-
-// Принудительно показываем FAB на мобильных устройствах при загрузке
+// ========== FAB НА МОБИЛЬНЫХ ==========
 function showFabOnMobile() {
     if (window.innerWidth <= 768) {
         const fab = document.getElementById("expandableFab");
@@ -581,16 +604,4 @@ function showFabOnMobile() {
     }
 }
 
-// Вызываем при загрузке
 showFabOnMobile();
-
-// Также при изменении размера окна
-window.addEventListener('resize', function() {
-    if (window.innerWidth <= 768) {
-        const fab = document.getElementById("expandableFab");
-        if (fab && fab.style.display !== "flex") {
-            fab.style.display = "flex";
-        }
-    }
-});
-
