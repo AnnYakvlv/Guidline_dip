@@ -661,8 +661,8 @@
     color: #FFFFFF;     
 }
 [data-theme="dark"] .btn-link:hover {
-    color: #002248;     
-}
-[data-theme="dark"] .btn-link:active {
     color: #004AAD;     
+}
+[data-theme="dark"] .btn-link:active { 
+    color: #002248;
 }
