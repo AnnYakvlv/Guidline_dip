@@ -505,96 +505,28 @@ window.addEventListener('resize', () => {
     }
 });
 
-// ========== ЗАЩИТА ОТ ВИСЯЧИХ ПРЕДЛОГОВ ==========
-function fixOrphanedPrepositions() {
-    const containers = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p, .cart-item-name, .cart-item-desc, .product-title, .product-desc');
+
+function protectPrepositions() {
+    const prepositions = ['в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни', 'со', 'из-за', 'из-под'];
     
-    const prepositions = new Set([
-        'в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 
-        'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 
-        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни'
-    ]);
+    const elements = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p');
     
-    containers.forEach(container => {
-        if (container.hasAttribute('data-preposition-processed')) return;
+    elements.forEach(el => {
+        let html = el.innerHTML;
         
-        const walker = document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode: function(node) {
-                    if (node.textContent.trim() === '') return NodeFilter.FILTER_SKIP;
-                    if (node.parentElement.tagName === 'SCRIPT' || 
-                        node.parentElement.tagName === 'STYLE') {
-                        return NodeFilter.FILTER_SKIP;
-                    }
-                    return NodeFilter.FILTER_ACCEPT;
-                }
-            }
-        );
-        
-        const textNodes = [];
-        while (walker.nextNode()) {
-            textNodes.push(walker.currentNode);
-        }
-        
-        let containerChanged = false;
-        
-        textNodes.forEach(node => {
-            let text = node.textContent;
-            let changed = false;
-            
-            const words = text.split(/(\s+)/);
-            
-            for (let i = 0; i < words.length - 2; i++) {
-                const word = words[i].trim().toLowerCase();
-                if (prepositions.has(word) && words[i+1].trim() === '') {
-                    if (words[i+2] && words[i+2].trim()) {
-                        words[i] = words[i] + words[i+1] + words[i+2];
-                        words[i+1] = '';
-                        words[i+2] = '';
-                        changed = true;
-                        i += 2;
-                    }
-                }
-            }
-            
-            if (changed) {
-                const newText = words.join('');
-                const span = document.createElement('span');
-                span.innerHTML = newText;
-                span.className = 'preposition-group';
-                node.parentNode.replaceChild(span, node);
-                containerChanged = true;
-            }
+        prepositions.forEach(prep => {
+            // Ищем предлог + пробел + слово
+            const regex = new RegExp(`(${prep})\\s+([а-яА-ЯёЁa-zA-Z0-9\\-]+)`, 'gi');
+            html = html.replace(regex, `<span class="preposition-group">$1&nbsp;$2</span>`);
         });
         
-        if (containerChanged) {
-            container.setAttribute('data-preposition-processed', 'true');
-        }
+        el.innerHTML = html;
     });
 }
 
-// Запускаем после загрузки страницы
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixOrphanedPrepositions);
-} else {
-    fixOrphanedPrepositions();
-}
+document.addEventListener('DOMContentLoaded', protectPrepositions);
 
-// Запускаем при ресайзе
-let prepositionResizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(prepositionResizeTimeout);
-    prepositionResizeTimeout = setTimeout(() => {
-        document.querySelectorAll('[data-preposition-processed]').forEach(el => {
-            el.removeAttribute('data-preposition-processed');
-        });
-        fixOrphanedPrepositions();
-    }, 300);
-});
-
-// ========== FAB НА МОБИЛЬНЫХ ==========
+// Принудительно показываем FAB на мобильных устройствах при загрузке
 function showFabOnMobile() {
     if (window.innerWidth <= 768) {
         const fab = document.getElementById("expandableFab");
@@ -604,4 +536,15 @@ function showFabOnMobile() {
     }
 }
 
+// Вызываем при загрузке
 showFabOnMobile();
+
+// Также при изменении размера окна
+window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+        const fab = document.getElementById("expandableFab");
+        if (fab && fab.style.display !== "flex") {
+            fab.style.display = "flex";
+        }
+    }
+});
