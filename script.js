@@ -507,24 +507,56 @@ window.addEventListener('resize', () => {
 
 
 function protectPrepositions() {
-    const prepositions = ['в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни', 'со', 'из-за', 'из-под'];
+    // Список предлогов и коротких слов (1-3 символа)
+    const prepositions = [
+        'в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 
+        'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 
+        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни', 'из-за', 'из-под',
+        'же', 'бы', 'ли', 'жд', 'ль', 'ж', 'б', 'чт', 'чтоб', 'чтобы'
+    ];
     
-    const elements = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p');
+    // Создаём регулярное выражение для поиска предлогов в тексте
+    // Ищем предлог + пробел + слово (русские/английские буквы, цифры, дефис)
+    const prepositionPattern = new RegExp(
+        `\\b(${prepositions.join('|')})\\s+(?=[А-Яа-яЁёA-Za-z0-9-]+)`,
+        'gi'
+    );
     
-    elements.forEach(el => {
-        let html = el.innerHTML;
-        
-        prepositions.forEach(prep => {
-            // Ищем предлог + пробел + слово
-            const regex = new RegExp(`(${prep})\\s+([а-яА-ЯёЁa-zA-Z0-9\\-]+)`, 'gi');
-            html = html.replace(regex, `<span class="preposition-group">$1&nbsp;$2</span>`);
-        });
-        
-        el.innerHTML = html;
-    });
+    // Функция для обработки текстовых узлов
+    function processTextNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            // Проверяем, что текст не внутри тега <pre>, <code> и т.д.
+            let parent = node.parentElement;
+            if (parent && (parent.tagName === 'PRE' || parent.tagName === 'CODE' || parent.tagName === 'SCRIPT')) {
+                return;
+            }
+            
+            let text = node.textContent;
+            let hasMatch = prepositionPattern.test(text);
+            
+            if (hasMatch) {
+                // Заменяем пробелы на &nbsp; между предлогом и следующим словом
+                let newText = text.replace(prepositionPattern, (match) => {
+                    // match содержит предлог + пробел, убираем пробел и добавляем &nbsp;
+                    return match.trim() + '&nbsp;';
+                });
+                
+                if (newText !== text) {
+                    const span = document.createElement('span');
+                    span.innerHTML = newText;
+                    node.parentNode.replaceChild(span, node);
+                }
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE && 
+                   !['SCRIPT', 'STYLE', 'PRE', 'CODE', 'INPUT', 'TEXTAREA'].includes(node.tagName)) {
+            // Рекурсивно обрабатываем дочерние узлы, но не заходим в инпуты и скрипты
+            node.childNodes.forEach(processTextNode);
+        }
+    }
+    
+    // Запускаем обработку для body
+    document.body.childNodes.forEach(processTextNode);
 }
-
-document.addEventListener('DOMContentLoaded', protectPrepositions);
 
 // Принудительно показываем FAB на мобильных устройствах при загрузке
 function showFabOnMobile() {
