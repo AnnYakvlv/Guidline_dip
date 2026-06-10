@@ -506,73 +506,56 @@ window.addEventListener('resize', () => {
 });
 
 
-// Полная функция защиты от висячих предлогов
-function fixOrphanedPrepositions() {
-    // Находим все текстовые контейнеры
-    const containers = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p, .cart-item-name, .cart-item-desc, .product-title, .product-desc');
-    
-    const prepositions = new Set([
+function protectPrepositions() {
+    // Список предлогов и коротких слов (1-3 символа)
+    const prepositions = [
         'в', 'во', 'без', 'до', 'для', 'за', 'из', 'к', 'ко', 'на', 
         'над', 'о', 'об', 'от', 'по', 'под', 'при', 'про', 'с', 'со', 
-        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни'
-    ]);
+        'у', 'и', 'а', 'но', 'да', 'или', 'не', 'ни', 'из-за', 'из-под',
+        'же', 'бы', 'ли', 'жд', 'ль', 'ж', 'б', 'чт', 'чтоб', 'чтобы'
+    ];
     
-    containers.forEach(container => {
-        const walker = document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode: function(node) {
-                    if (node.textContent.trim() === '') return NodeFilter.FILTER_SKIP;
-                    if (node.parentElement.tagName === 'SCRIPT' || 
-                        node.parentElement.tagName === 'STYLE') {
-                        return NodeFilter.FILTER_SKIP;
-                    }
-                    return NodeFilter.FILTER_ACCEPT;
-                }
+    // Создаём регулярное выражение для поиска предлогов в тексте
+    // Ищем предлог + пробел + слово (русские/английские буквы, цифры, дефис)
+    const prepositionPattern = new RegExp(
+        `\\b(${prepositions.join('|')})\\s+(?=[А-Яа-яЁёA-Za-z0-9-]+)`,
+        'gi'
+    );
+    
+    // Функция для обработки текстовых узлов
+    function processTextNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            // Проверяем, что текст не внутри тега <pre>, <code> и т.д.
+            let parent = node.parentElement;
+            if (parent && (parent.tagName === 'PRE' || parent.tagName === 'CODE' || parent.tagName === 'SCRIPT')) {
+                return;
             }
-        );
-        
-        const textNodes = [];
-        while (walker.nextNode()) {
-            textNodes.push(walker.currentNode);
-        }
-        
-        textNodes.forEach(node => {
+            
             let text = node.textContent;
-            let changed = false;
+            let hasMatch = prepositionPattern.test(text);
             
-            const words = text.split(/(\s+)/);
-            
-            for (let i = 0; i < words.length - 2; i++) {
-                const word = words[i].trim().toLowerCase();
-                if (prepositions.has(word) && words[i+1].trim() === '') {
-                    if (words[i+2] && words[i+2].trim()) {
-                        words[i] = words[i] + words[i+1] + words[i+2];
-                        words[i+1] = '';
-                        words[i+2] = '';
-                        changed = true;
-                        i += 2;
-                    }
+            if (hasMatch) {
+                // Заменяем пробелы на &nbsp; между предлогом и следующим словом
+                let newText = text.replace(prepositionPattern, (match) => {
+                    // match содержит предлог + пробел, убираем пробел и добавляем &nbsp;
+                    return match.trim() + '&nbsp;';
+                });
+                
+                if (newText !== text) {
+                    const span = document.createElement('span');
+                    span.innerHTML = newText;
+                    node.parentNode.replaceChild(span, node);
                 }
             }
-            
-            if (changed) {
-                const newText = words.join('');
-                const span = document.createElement('span');
-                span.innerHTML = newText;
-                span.className = 'preposition-group';
-                node.parentNode.replaceChild(span, node);
-            }
-        });
-    });
-}
-
-// Запускаем после загрузки страницы
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixOrphanedPrepositions);
-} else {
-    fixOrphanedPrepositions();
+        } else if (node.nodeType === Node.ELEMENT_NODE && 
+                   !['SCRIPT', 'STYLE', 'PRE', 'CODE', 'INPUT', 'TEXTAREA'].includes(node.tagName)) {
+            // Рекурсивно обрабатываем дочерние узлы, но не заходим в инпуты и скрипты
+            node.childNodes.forEach(processTextNode);
+        }
+    }
+    
+    // Запускаем обработку для body
+    document.body.childNodes.forEach(processTextNode);
 }
 
 let resizeTimeout;
