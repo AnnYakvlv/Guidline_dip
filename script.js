@@ -506,7 +506,7 @@ window.addEventListener('resize', () => {
 });
 
 
-// Полная функция защиты от висячих предлогов (финальная версия)
+// Полная функция защиты от висячих предлогов
 function fixOrphanedPrepositions() {
     // Находим все текстовые контейнеры
     const containers = document.querySelectorAll('p, h1, h2, h3, h4, .section-head p, .concept-card p, .photostyle-card p, .cart-item-name, .cart-item-desc, .product-title, .product-desc');
@@ -518,17 +518,14 @@ function fixOrphanedPrepositions() {
     ]);
     
     containers.forEach(container => {
-        // Сохраняем HTML-структуру, обрабатываем только текст
         const walker = document.createTreeWalker(
             container,
             NodeFilter.SHOW_TEXT,
             {
                 acceptNode: function(node) {
-                    // Пропускаем пустые узлы и узлы внутри тегов, которые не нужно трогать
                     if (node.textContent.trim() === '') return NodeFilter.FILTER_SKIP;
                     if (node.parentElement.tagName === 'SCRIPT' || 
-                        node.parentElement.tagName === 'STYLE' ||
-                        node.parentElement.classList?.contains('no-preposition')) {
+                        node.parentElement.tagName === 'STYLE') {
                         return NodeFilter.FILTER_SKIP;
                     }
                     return NodeFilter.FILTER_ACCEPT;
@@ -545,21 +542,17 @@ function fixOrphanedPrepositions() {
             let text = node.textContent;
             let changed = false;
             
-            // Разбиваем на слова
             const words = text.split(/(\s+)/);
             
             for (let i = 0; i < words.length - 2; i++) {
                 const word = words[i].trim().toLowerCase();
-                // Если это предлог
                 if (prepositions.has(word) && words[i+1].trim() === '') {
-                    // Следующий элемент — пробел, а после него — слово
                     if (words[i+2] && words[i+2].trim()) {
-                        // Объединяем предлог + пробел + следующее слово
                         words[i] = words[i] + words[i+1] + words[i+2];
                         words[i+1] = '';
                         words[i+2] = '';
                         changed = true;
-                        i += 2; // Пропускаем обработанные элементы
+                        i += 2;
                     }
                 }
             }
@@ -581,6 +574,12 @@ if (document.readyState === 'loading') {
 } else {
     fixOrphanedPrepositions();
 }
+
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(fixOrphanedPrepositions, 250);
+});
 
 // Запускаем также при ресайзе окна (на случай изменения переносов)
 let resizeTimeout;
