@@ -1596,6 +1596,37 @@ section:last-of-type {
     display: inline-block;
     white-space: nowrap;
 }
+/* Защита от висячих предлогов через CSS */
+.preposition-group {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* Альтернативное решение для всех коротких слов */
+.short-word {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* Глобальная защита от разрыва строк для предлогов */
+p, h1, h2, h3, h4, .text-block, .description, .card-text {
+    word-break: keep-all; /* Запрещает разрыв внутри слов */
+    overflow-wrap: normal;
+}
+
+/* На мобильных устройствах - более мягкая защита */
+@media (max-width: 768px) {
+    .preposition-group {
+        white-space: normal; /* На мобилках позволяем перенос, но с умом */
+    }
+    
+    /* Запрещаем разрыв внутри коротких слов */
+    p, .text-content, .card-description {
+        word-break: normal;
+        overflow-wrap: break-word;
+        hyphens: none; /* Отключаем переносы по слогам */
+    }
+}
 
 [data-theme="dark"] .close {
     background: var(--surface-2);
