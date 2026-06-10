@@ -594,7 +594,10 @@
 .ui-modal-mobile-content {
     position: relative;
 }
-
+.ui-modal-desktop-content .btn-primary,
+.ui-modal-mobile-content .btn-primary {
+    margin-top: 24px;
+}
 /* btn-primary - при нажатии */
 .btn-primary:active {
     background: #d4db4a;  /* темнее на 10% */
