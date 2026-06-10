@@ -1602,7 +1602,7 @@ section:last-of-type {
     display: inline-block;
 }
 
-/* Альтернативное решение для всех коротких слов */
+/* Альтернативное решение для коротких слов */
 .short-word {
     white-space: nowrap;
     display: inline-block;
