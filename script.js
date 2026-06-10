@@ -100,7 +100,7 @@ function updateModal() {
     const currentImage = c.images[window.currentImgIdx];
     const modalVisual = document.getElementById("modalVisual");
     
-    // Очищаем и устанавливаем только img без дополнительных оберток
+    // Очищаем и устанавливаем img без дополнительных оберток
     modalVisual.innerHTML = `<img src="${currentImage}" alt="${c.name}" class="modal-image">`;
 }
 
